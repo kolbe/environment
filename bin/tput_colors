@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+tr=$(tput sgr0)
+tb=$(tput bold)
+
+for c in {0..7}; do
+    tc=$(tput setaf "$c")
+    printf "  %s\n" "$tc$c $tb$tc$c $tr"
+done

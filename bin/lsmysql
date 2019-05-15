@@ -1,0 +1,36 @@
+#!/bin/bash 
+
+mysqlinstroot=/Users/kolbe/Devel/mysql
+pidonly=0
+
+while getopts "p" OPTION
+do
+     case $OPTION in
+        p) 
+                pidonly=1
+                ;;
+     esac
+done
+
+if ! cd "$mysqlinstroot"; then
+    echo "Could not cd to $mysqlinstroot" >&2
+    exit 1
+fi
+
+for f in *; do
+        if [[ ! -h $f ]] && [[ -d $f ]] && [[ $f != downloads ]]; then
+                echo "$f"
+                ((pidonly)) || printf %s
+                if [[ -e $f/data/mysql.sock ]]; then
+#                       PID=$(ps aux | grep $f | grep mysqld_safe | awk '{print $2}')
+                        pid=$(cat "$f"/data/*.pid)
+                        if ((pidonly)); then
+                                printf %s\ "$pid"
+                        else 
+                            printf %s%s%s\\n "$(tput setaf 2; tput bold)  [running: " "$pid" "]$(tput sgr0)"
+                        fi
+                fi
+                ((pidonly)) && printf \\n
+        fi
+done
+((pidonly)) && printf \\n

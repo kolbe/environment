@@ -6,10 +6,11 @@ rmln(){ file=$1; shift; { printf %sd\\n "$@"; echo w; } | ed -s "$file"; }
 look(){ out=$(qlmanage -p "$@" 2>&1) || echo "$out" ; }
 ql(){ out=$(qlmanage -p "$@" 2>&1) || echo "$out" ; }
 lk(){ look "$@"; }
-boxme() {
+box() {
     local tput=$(tput bold)
     tputreset=$(tput sgr0)
-    width=${WIDTH:-$((COLUMNS-2))}
+    #width=${WIDTH:-$((COLUMNS-2))}
+    width=${WIDTH:-72}
     if (($#>1)); then
         if [[ $1 = [0-9] ]]; then
             tput=$tput$(tput setaf $1)
@@ -18,13 +19,16 @@ boxme() {
         fi
         shift
     fi
-    msg=$*
 
     printf -v line "%*s" "$width"
-    pre_space=$(( width / 2 + ${#msg} / 2 ))
-    post_space=$(( width - ((width-1)/2 + ${#msg}/2) + width%2 ))
-    printf -v center "%s%s %${pre_space}s %s%${post_space}s" ┃ "$tput" "$msg" "$tputreset" ┃
-    printf '%s\n' "┏${line// /━}┓" "$center" "┗${line// /━}┛"
+    printf %s\\n "┏${line// /━}┓"
+    for msg in "$@"; do
+        pre_space=$(( width / 2 + ${#msg} / 2 ))
+        post_space=$(( width - ((width-1)/2 + ${#msg}/2) + width%2 ))
+        printf -v center "%s%s %${pre_space}s %s%${post_space}s" ┃ "$tput" "$msg" "$tputreset" ┃
+        printf %s\\n "$center"
+    done
+    printf %s\\n "┗${line// /━}┛"
 }
 retry(){
     local success=0 i=1
