@@ -1,0 +1,4 @@
+set completion-ignore-case on
+"\eB":shell-backward-word
+"\eF":shell-forward-word
+"\eH":shell-backward-kill-word

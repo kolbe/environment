@@ -1,0 +1,3 @@
+vmip() {
+    vmrun getGuestIPAddress "$@"
+}
