@@ -104,9 +104,11 @@ alias nohist='unset HISTFILE'
 alias awskmk='ln -sf ~/.awssecret_kolbe ~/.awssecret'
 alias awssky='ln -sf ~/.awssecret_skysql ~/.awssecret'
 
-for f in ~/.bash/*.bash ~/.bash/*.sh; do [[ -e $f ]] && source "$f"; done
-#for f in /usr/local/etc/bash_completion.d/*; do [[ -e $f ]] && source "$f"; done
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+for f in ~/.bash/*.bash ~/.bash/*.sh; do [[ -e $f ]] && source "$f"; done
+[[ -e ~/.bash_profile.private ]] && source ~/.bash_profile.private
+
 export FLEETCTL_ENDPOINT=http://172.17.8.101:4001
 export KUBERNETES_MASTER=http://172.17.8.101:8080
 
