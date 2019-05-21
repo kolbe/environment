@@ -19,12 +19,17 @@ box() {
         fi
         shift
     fi
+    ((DEBUG)) && declare -p width
 
     printf -v line "%*s" "$width"
     printf %s\\n "┏${line// /━}┓"
     for msg in "$@"; do
+        ((DEBUG)) && declare -p msg
+        ((DEBUG)) && echo '${#msg}: '"${#msg}"
         pre_space=$(( width / 2 + ${#msg} / 2 ))
+        ((DEBUG)) && declare -p pre_space
         post_space=$(( width - ((width-1)/2 + ${#msg}/2) + width%2 ))
+        ((DEBUG)) && declare -p post_space
         printf -v center "%s%s %${pre_space}s %s%${post_space}s" ┃ "$tput" "$msg" "$tputreset" ┃
         printf %s\\n "$center"
     done

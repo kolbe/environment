@@ -1,0 +1,12 @@
+Host 192.168.236.*
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+
+Host retsina.local
+  ForwardAgent yes
+  RemoteForward 24800 localhost:24800
+
+Host floathouse.ddns.net
+  Port 2200
+  ForwardAgent yes
+  LocalForward 5901 localhost:5900
