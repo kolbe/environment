@@ -1,0 +1,2 @@
+cp -avs "$PWD"/home/. ~/
+rsync -avn etc/ /etc/
