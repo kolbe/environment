@@ -121,8 +121,8 @@ alias awssky='ln -sf ~/.awssecret_skysql ~/.awssecret'
 for f in ~/.bash/*.bash ~/.bash/*.sh; do [[ -e $f ]] && source "$f"; done
 [[ -e ~/.bash_profile.private ]] && source ~/.bash_profile.private
 
-export FLEETCTL_ENDPOINT=http://172.17.8.101:4001
-export KUBERNETES_MASTER=http://172.17.8.101:8080
+#export FLEETCTL_ENDPOINT=http://172.17.8.101:4001
+#export KUBERNETES_MASTER=http://172.17.8.101:8080
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
