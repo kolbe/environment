@@ -24,7 +24,6 @@ tm(){ if pgrep -x tmux; then tmux attach; else tmux; fi; }
 alias easy='ssh easy.uselesstrash.com -A -t screen -xR'
 #alias sshinit='ssh-agent -s > ~/.ssh/sshagent; source ~/.ssh/sshagent; ssh-add;'
 #source ~/.ssh/sshagent
-alias ip='whois -h whois.arin.net'
 alias nw='ssh -p 2222 ssh.nameworthy.net'
 
 remx ()
@@ -86,7 +85,6 @@ function ltx() {
 }
 find_uniq() { max_iter=100; [[ -z $1 ]] && { printf "must specify filename\n">&2; return 1; }; file=$1; base=${file%.*}; ext=${file##*.}; for ((i=0; i<=max_iter;)); do if ! [[ -e "$file" ]]; then printf "%s\n" "$file"; return; else file="${base} ($((++i))).${ext}"; fi; done; printf "could not find suitable file within 100 iterations\n">&2; return 1;  }
 alias calc='open /Applications/Calculator.app/'
-alias vlc='open -a VLC'
 alias duh='du -skc -- * | sort -n | hr -k'
 alias hide='unset HISTFILE'
 
@@ -113,3 +111,5 @@ export FLEETCTL_ENDPOINT=http://172.17.8.101:4001
 export KUBERNETES_MASTER=http://172.17.8.101:8080
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+source ~/.bashrc
