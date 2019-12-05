@@ -20,11 +20,8 @@ fwdX() { socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"; }
 # start new tmux instance or reconnect to existing instance
 tm(){ if pgrep -x tmux; then tmux attach; else tmux; fi; }
 
-#alias easy='mosh easy'
-alias easy='ssh easy.uselesstrash.com -A -t screen -xR'
 #alias sshinit='ssh-agent -s > ~/.ssh/sshagent; source ~/.ssh/sshagent; ssh-add;'
 #source ~/.ssh/sshagent
-alias nw='ssh -p 2222 ssh.nameworthy.net'
 
 remx ()
 {
@@ -84,9 +81,25 @@ function ltx() {
 	done
 }
 find_uniq() { max_iter=100; [[ -z $1 ]] && { printf "must specify filename\n">&2; return 1; }; file=$1; base=${file%.*}; ext=${file##*.}; for ((i=0; i<=max_iter;)); do if ! [[ -e "$file" ]]; then printf "%s\n" "$file"; return; else file="${base} ($((++i))).${ext}"; fi; done; printf "could not find suitable file within 100 iterations\n">&2; return 1;  }
+
+dns(){ command dscacheutil -q host -a name "$@"; }
+
+h(){
+    if ! (($#)); then
+        x=-1 y=-1
+    else
+        x=$1 y=$1
+    fi
+    [[ $2 ]] && y=$2
+    while IFS= read -r ln; do
+        printf %s\\n "${ln:2}"
+    done < <(fc -nl "$x" "$y")
+}
+
 alias calc='open /Applications/Calculator.app/'
 alias duh='du -skc -- * | sort -n | hr -k'
 alias hide='unset HISTFILE'
+alias mv='mv -vi'
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -107,9 +120,10 @@ alias awssky='ln -sf ~/.awssecret_skysql ~/.awssecret'
 for f in ~/.bash/*.bash ~/.bash/*.sh; do [[ -e $f ]] && source "$f"; done
 [[ -e ~/.bash_profile.private ]] && source ~/.bash_profile.private
 
-export FLEETCTL_ENDPOINT=http://172.17.8.101:4001
-export KUBERNETES_MASTER=http://172.17.8.101:8080
+#export FLEETCTL_ENDPOINT=http://172.17.8.101:4001
+#export KUBERNETES_MASTER=http://172.17.8.101:8080
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
 source ~/.bashrc
+complete -C /usr/local/bin/mc mc

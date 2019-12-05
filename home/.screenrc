@@ -1,2 +1,3 @@
 term screen-256color
 setenv SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
+shell -bash
