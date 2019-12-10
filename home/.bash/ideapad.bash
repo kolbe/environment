@@ -1,8 +1,10 @@
-[[ $HOSTNAME == ideapad ]] || return 1
+[[ $HOSTNAME == ideapad ]] || return
 
 vlc(){
-    command vlc \
-        --sout "#chromecast" --sout-chromecast-ip=192.168.0.107 --demux-filter=demux_chromecast \
-        --extraintf=http --http-password=vlcpass --http-port=8888 \
-        "$@"
+    chromecast_device="Living Room TV"
+    chromecast_ip=$(
+        avahi-browse -ptcr _googlecast._tcp | 
+            awk -v pattern="\"fn=$chromecast_device\"" -F\; '$10 ~ pattern {print $8}'
+    )
+    command vlc --sout-chromecast-ip="$chromecast_ip" "$@"
 }
