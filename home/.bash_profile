@@ -97,10 +97,10 @@ h(){
 }
 
 alias calc='open /Applications/Calculator.app/'
-alias vlc='open -a VLC'
 alias duh='du -skc -- * | sort -n | hr -k'
 alias hide='unset HISTFILE'
 alias mv='mv -vi'
+[[ $(uname) == Darwin ]] && vlc(){ open -a VLC "$@"; }
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
