@@ -126,4 +126,5 @@ for f in ~/.bash/*.bash ~/.bash/*.sh; do [[ -e $f ]] && source "$f"; done
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
+source ~/.bashrc
 complete -C /usr/local/bin/mc mc
