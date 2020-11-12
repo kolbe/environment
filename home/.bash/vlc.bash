@@ -1,9 +1,12 @@
 vlcpass=vlcpass
 vlcfile(){
+    host=127.0.0.1
+    port=8080
+
     if ! name=$(
         #curl -sS http://:"$vlcpass"@127.0.0.1:8080/requests/status.xml | 
         #    xmlstarlet sel -t -v "/root/information/category[@name='meta']/info[@name='filename']"
-        curl -sS http://:"$vlcpass"@127.0.0.1:8080/requests/playlist.xml |
+        curl -sS http://:"$vlcpass"@$host:$port/requests/playlist.xml |
             xmlstarlet sel -t -v '//node[@name="Playlist"]/leaf[@current]/@uri'
             #jq -er '.children[] | select (.name=="Playlist") | .children[] | select(.current) | .uri'
     ); then

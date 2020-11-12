@@ -48,3 +48,7 @@ retry(){
         ((i++))
    done
 }
+prettystack(){
+    sed -e 's/\\t/      /g' -e 's/\\n/\
+        /g'
+}

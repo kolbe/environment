@@ -104,7 +104,7 @@ alias mv='mv -vi'
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*|screen*)
+xterm*|rxvt*|screen*|tmux*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
@@ -128,3 +128,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 source ~/.bashrc
 complete -C /usr/local/bin/mc mc
+rmv(){ rsync -avP --remove-source-files "$@"; }
+export PATH=/Users/kolbe/.tiup/bin:$PATH
