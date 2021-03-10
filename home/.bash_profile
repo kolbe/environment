@@ -3,7 +3,8 @@ PS1="\[$(tput sgr0; tput bold; tput setaf 7)\]\u@\h \[$(tput sgr0; tput dim; tpu
 FIGNORE=DS_Store
 #DISPLAY=:0.0
 PATH=/Users/kolbe/Devel/bin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/mysql/bin:~/Devel/go/bin
-MANPATH=/usr/local/share/man:/usr/share/man:/usr/local/man:/usr/local/mysql/man
+[[ $(uname -m) = arm64 ]] && [[ $(uname -s) = Darwin ]] && PATH=/opt/homebrew/bin:$PATH
+MANPATH=/opt/homebrew/share/man:/usr/local/share/man:/usr/share/man:/usr/local/man:/usr/local/mysql/man
 #JAVA_HOME=/usr
 CLICOLOR=yes
 LESS=-IMFXRj.3
@@ -124,9 +125,9 @@ for f in ~/.bash/*.bash ~/.bash/*.sh; do [[ -e $f ]] && source "$f"; done
 #export FLEETCTL_ENDPOINT=http://172.17.8.101:4001
 #export KUBERNETES_MASTER=http://172.17.8.101:8080
 
-export PATH="$HOME/.cargo/bin:$PATH"
 
 source ~/.bashrc
 complete -C /usr/local/bin/mc mc
 rmv(){ rsync -avP --remove-source-files "$@"; }
 export PATH=/Users/kolbe/.tiup/bin:$PATH
+source "$HOME/.cargo/env"
