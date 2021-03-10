@@ -24,7 +24,7 @@ map <xF4> <F4>
 map <xF3> <F3>
 map <xF2> <F2>
 map <xF1> <F1>
-set mouse=
+set mouse=a
 set ruler
 set viminfo='20,\"50,h
 " syntax on
@@ -69,7 +69,13 @@ set shiftwidth=4
 set softtabstop=4
 set ignorecase
 
+set scrolloff=5
+
 
 autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
 autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
+
+" configure gopls? also disable guru in vim-go
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 

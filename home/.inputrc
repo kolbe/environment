@@ -1,4 +1,5 @@
 set completion-ignore-case on
+set enable-bracketed-paste on
 "\eB":shell-backward-word
 "\eF":shell-forward-word
 "\eH":shell-backward-kill-word

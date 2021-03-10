@@ -95,14 +95,14 @@ h(){
 }
 
 alias calc='open /Applications/Calculator.app/'
-alias vlc='open -a VLC'
 alias duh='du -skc -- * | sort -n | hr -k'
 alias hide='unset HISTFILE'
 alias mv='mv -vi'
+[[ $(uname) == Darwin ]] && vlc(){ open -a VLC "$@"; }
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*|screen*)
+xterm*|rxvt*|screen*|tmux*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
@@ -119,10 +119,12 @@ alias awssky='ln -sf ~/.awssecret_skysql ~/.awssecret'
 for f in ~/.bash/*.bash ~/.bash/*.sh; do [[ -e $f ]] && source "$f"; done
 [[ -e ~/.bash_profile.private ]] && source ~/.bash_profile.private
 
-export FLEETCTL_ENDPOINT=http://172.17.8.101:4001
-export KUBERNETES_MASTER=http://172.17.8.101:8080
+#export FLEETCTL_ENDPOINT=http://172.17.8.101:4001
+#export KUBERNETES_MASTER=http://172.17.8.101:8080
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
+source ~/.bashrc
 complete -C /usr/local/bin/mc mc
+rmv(){ rsync -avP --remove-source-files "$@"; }
 export PATH=/Users/kolbe/.tiup/bin:$PATH
