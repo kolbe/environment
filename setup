@@ -1,2 +1,6 @@
-cp -avs "$PWD"/home/. ~/
-rsync -avn etc/ /etc/
+cp="cp"
+if [[ $(uname) = Darwin ]]; then
+   cp="gcp"
+   rsync -avn etc/ /etc/
+fi
+"$cp" -avs "$PWD"/home/. ~/

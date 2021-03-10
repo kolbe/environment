@@ -1,5 +1,3 @@
-#PS1='\[\033[01;35m\]\u@\h [\t] \[\033[01;34m\]\W \$ \[\033[00m\]'
-PS1="\[$(tput sgr0; tput bold; tput setaf 7)\]\u@\h \[$(tput sgr0; tput dim; tput setaf 7)\][\t]\[$(tput bold; tput setaf 4)\] \W \$ \[$(tput sgr0)\]"
 FIGNORE=DS_Store
 #DISPLAY=:0.0
 PATH=/Users/kolbe/Devel/bin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/mysql/bin:~/Devel/go/bin
@@ -127,3 +125,4 @@ export KUBERNETES_MASTER=http://172.17.8.101:8080
 export PATH="$HOME/.cargo/bin:$PATH"
 
 complete -C /usr/local/bin/mc mc
+export PATH=/Users/kolbe/.tiup/bin:$PATH
