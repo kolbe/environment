@@ -128,4 +128,4 @@ source ~/.bashrc
 complete -C /usr/local/bin/mc mc
 rmv(){ rsync -avP --remove-source-files "$@"; }
 export PATH=/Users/kolbe/.tiup/bin:$PATH
-source "$HOME/.cargo/env"
+[[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
