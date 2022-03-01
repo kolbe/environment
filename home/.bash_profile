@@ -1,6 +1,6 @@
 FIGNORE=DS_Store
 #DISPLAY=:0.0
-PATH=/Users/kolbe/Devel/bin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/mysql/bin:~/Devel/go/bin
+PATH=/Users/kolbe/Devel/bin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/mysql/bin:~/Devel/go/bin:/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
 [[ $(uname -m) = arm64 ]] && [[ $(uname -s) = Darwin ]] && PATH=/opt/homebrew/bin:$PATH
 MANPATH=/opt/homebrew/share/man:/usr/local/share/man:/usr/share/man:/usr/local/man:/usr/local/mysql/man
 #JAVA_HOME=/usr
@@ -38,7 +38,7 @@ c(){ local IFS=';'; e="scale=6;$*"; bc<<<"$e"; }
 sprunge() { curl -F 'sprunge=<-' http://sprunge.us; }
 clbin()   { curl -F 'clbin=<-' https://clbin.com; }
 ix()      { curl -F 'f:1=<-' http://ix.io; }
-myip () { ip=$(curl -sS http://icanhazip.com/); echo "$ip"; host "$ip" >&2; }
+myip () { ip=$(curl -4 -sS http://icanhazip.com/); echo "$ip"; host "$ip" >&2; }
 pbsprunge () { pbpaste | ix | tr -d '\n' | pbcopy; pbpaste; printf '\n'; }
 pbuy () { pbpaste | uy | tr -d '\n' | pbcopy; pbpaste; printf '\n'; }
 
