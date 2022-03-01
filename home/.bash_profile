@@ -1,3 +1,4 @@
+PS1="\[$(tput sgr0; tput bold; tput setaf 7)\]\u@\h \[$(tput sgr0; tput dim; tput setaf 7)\][\t]\[$(tput bold; tput setaf 4)\] \W \$ \[$(tput sgr0)\]"
 FIGNORE=DS_Store
 #DISPLAY=:0.0
 PATH=/Users/kolbe/Devel/bin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/mysql/bin:~/Devel/go/bin:/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
