@@ -2,6 +2,7 @@ PS1="\[$(tput sgr0; tput bold; tput setaf 7)\]\u@\h \[$(tput sgr0; tput dim; tpu
 FIGNORE=DS_Store
 #DISPLAY=:0.0
 PATH=/Users/kolbe/Devel/bin:/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/mysql/bin:~/Devel/go/bin:/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
+PATH=$PATH:/opt/homebrew/lib/ruby/gems/3.1.0/bin
 [[ $(uname -m) = arm64 ]] && [[ $(uname -s) = Darwin ]] && PATH=/opt/homebrew/bin:$PATH
 MANPATH=/opt/homebrew/share/man:/usr/local/share/man:/usr/share/man:/usr/local/man:/usr/local/mysql/man
 #JAVA_HOME=/usr
@@ -129,4 +130,17 @@ source ~/.bashrc
 complete -C /usr/local/bin/mc mc
 rmv(){ rsync -avP --remove-source-files "$@"; }
 export PATH=/Users/kolbe/.tiup/bin:$PATH
-[[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
+[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+
+ssh-auth-fix(){
+    if [[ $(uname -s) == Darwin ]]
+    then
+        while read -r row
+        do
+            export SSH_AUTH_SOCK="${row:1}"
+        done < <(
+            lsof -F n -p $(pgrep ssh-agent) -a -d 3 2>/dev/null | grep '^n'
+        )
+    fi
+}
