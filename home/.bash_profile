@@ -131,7 +131,10 @@ complete -C /usr/local/bin/mc mc
 rmv(){ rsync -avP --remove-source-files "$@"; }
 export PATH=/Users/kolbe/.tiup/bin:$PATH
 
-[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+if type brew >/dev/null 2>&1 && [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]
+then
+     . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+fi
 
 ssh-auth-fix(){
     if [[ $(uname -s) == Darwin ]]
